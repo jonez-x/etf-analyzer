@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { getTrendingETFs, calculateSavingsProjection } from '../services/api';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ArcElement } from 'chart.js';
-import type { ETFQuote, SavingsPlan } from '../types/etf';
+import type { ETFQuote } from '../types/etf';
 import {
     PiggyBank,
     Calculator,
@@ -22,7 +22,7 @@ import './SavingsPlan.css';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, ArcElement);
 
 export function SavingsPlan() {
-    const { savingsPlans, addSavingsPlan, deleteSavingsPlan } = useApp();
+    const { savingsPlans, createSavingsPlan, deleteSavingsPlan } = useApp();
     const [availableETFs, setAvailableETFs] = useState<ETFQuote[]>([]);
 
     // Calculator state
@@ -116,7 +116,7 @@ export function SavingsPlan() {
                 grid: { color: 'rgba(63, 63, 70, 0.3)' },
                 ticks: {
                     color: '#71717a',
-                    callback: (value: number) => `${(value / 1000).toFixed(0)}k €`
+                    callback: (value: string | number) => `${(Number(value) / 1000).toFixed(0)}k €`
                 }
             }
         }
@@ -125,20 +125,22 @@ export function SavingsPlan() {
     const handleCreatePlan = () => {
         if (!newPlanName || selectedETFs.length === 0) return;
 
-        const newPlan: SavingsPlan = {
-            id: Date.now().toString(),
+        createSavingsPlan({
             name: newPlanName,
-            monthlySavings,
-            duration,
+            monthlyAmount: monthlySavings,
+            projectedYears: duration,
             expectedReturn,
-            etfs: selectedETFs.map(symbol => ({
-                symbol,
-                allocation: 100 / selectedETFs.length
-            })),
-            createdAt: new Date().toISOString()
-        };
+            etfs: selectedETFs.map(symbol => {
+                const etf = availableETFs.find(e => e.symbol === symbol);
+                return {
+                    symbol,
+                    name: etf?.name || symbol,
+                    allocation: 100 / selectedETFs.length
+                };
+            }),
+            startDate: new Date().toISOString()
+        });
 
-        addSavingsPlan(newPlan);
         setShowNewPlan(false);
         setNewPlanName('');
         setSelectedETFs([]);
@@ -152,12 +154,12 @@ export function SavingsPlan() {
         }).format(value);
     };
 
-    const getPlanProjection = (plan: SavingsPlan) => {
-        const proj = calculateSavingsProjection(plan.monthlySavings, plan.duration, plan.expectedReturn);
+    const getPlanProjection = (plan: { monthlyAmount: number; projectedYears: number; expectedReturn: number }) => {
+        const proj = calculateSavingsProjection(plan.monthlyAmount, plan.projectedYears, plan.expectedReturn);
         return proj[proj.length - 1]?.value || 0;
     };
 
-    const getAllocationChartData = (plan: SavingsPlan) => ({
+    const getAllocationChartData = (plan: { etfs: { symbol: string; allocation: number }[] }) => ({
         labels: plan.etfs.map(e => e.symbol),
         datasets: [{
             data: plan.etfs.map(e => e.allocation),
@@ -363,11 +365,11 @@ export function SavingsPlan() {
                                 <div className="plan-stats">
                                     <div className="plan-stat">
                                         <span className="plan-stat-label">Monatl.</span>
-                                        <span className="plan-stat-value">{formatCurrency(plan.monthlySavings)}</span>
+                                        <span className="plan-stat-value">{formatCurrency(plan.monthlyAmount)}</span>
                                     </div>
                                     <div className="plan-stat">
                                         <span className="plan-stat-label">Dauer</span>
-                                        <span className="plan-stat-value">{plan.duration}J</span>
+                                        <span className="plan-stat-value">{plan.projectedYears}J</span>
                                     </div>
                                     <div className="plan-stat">
                                         <span className="plan-stat-label">Rendite</span>

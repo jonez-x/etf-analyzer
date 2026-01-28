@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler, type ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import type { ETFHistoricalData } from '../types/etf';
-import { Loader2 } from 'lucide-react';
 import './PriceChart.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
@@ -31,7 +30,6 @@ export function PriceChart({ data, symbol, height = 300 }: PriceChartProps) {
     // Calculate if trend is positive
     const isPositive = data.length >= 2 ? data[data.length - 1].close >= data[0].close : true;
     const chartColor = isPositive ? '#22c55e' : '#ef4444';
-    const accentColor = '#f97316'; // Orange accent
 
     useEffect(() => {
         const chart = chartRef.current;

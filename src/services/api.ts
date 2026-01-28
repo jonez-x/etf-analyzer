@@ -13,10 +13,6 @@ import type {
 const API_KEY = import.meta.env.VITE_TWELVE_DATA_API_KEY || '';
 const BASE_URL = 'https://api.twelvedata.com';
 
-// Alternative: Alpha Vantage API
-const ALPHA_VANTAGE_KEY = import.meta.env.VITE_ALPHA_VANTAGE_KEY || 'demo';
-const ALPHA_VANTAGE_URL = 'https://www.alphavantage.co/query';
-
 // Cache for API responses
 const cache = new Map<string, { data: unknown; timestamp: number }>();
 const CACHE_DURATION = 60000; // 1 minute

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import type { ETFQuote, SavingsPlan, SavingsPlanETF } from '../types/etf';
+import type { ETFQuote, SavingsPlan } from '../types/etf';
 import { getTrendingETFs } from '../services/api';
 
 interface AppContextType {
