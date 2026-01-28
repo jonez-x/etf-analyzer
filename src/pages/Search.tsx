@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { searchETFs, getTrendingETFs } from '../services/api';
 import { ETFCard } from '../components/ETFCard';
 import { useApp } from '../context/AppContext';
@@ -123,7 +124,11 @@ export function Search() {
                                 return <ETFCard key={result.symbol} etf={etfData} />;
                             }
                             return (
-                                <div key={result.symbol} className="search-result-item">
+                                <Link
+                                    key={result.symbol}
+                                    to={`/etf/${result.symbol}`}
+                                    className="search-result-item"
+                                >
                                     <div className="result-info">
                                         <span className="result-symbol">{result.symbol}</span>
                                         <span className="result-name">{result.name}</span>
@@ -132,7 +137,7 @@ export function Search() {
                                         <span className="result-exchange">{result.exchange}</span>
                                         <span className="result-type">{result.type}</span>
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })}
                     </div>

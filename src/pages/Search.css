@@ -133,6 +133,8 @@
     border-radius: var(--border-radius-lg);
     cursor: pointer;
     transition: all var(--transition-base);
+    text-decoration: none;
+    color: inherit;
 }
 
 .search-result-item:hover {
