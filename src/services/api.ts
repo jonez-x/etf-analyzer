@@ -9,11 +9,12 @@ import type {
 } from '../types/etf';
 
 // Twelve Data API - Get a free key at https://twelvedata.com/
-const API_KEY = '3a11724efac54bf897f0c6d6f5c5f614'; // Replace with your API key
+// Set VITE_TWELVE_DATA_API_KEY in your .env or Vercel environment variables
+const API_KEY = import.meta.env.VITE_TWELVE_DATA_API_KEY || '';
 const BASE_URL = 'https://api.twelvedata.com';
 
 // Alternative: Alpha Vantage API
-const ALPHA_VANTAGE_KEY = 'demo';
+const ALPHA_VANTAGE_KEY = import.meta.env.VITE_ALPHA_VANTAGE_KEY || 'demo';
 const ALPHA_VANTAGE_URL = 'https://www.alphavantage.co/query';
 
 // Cache for API responses
