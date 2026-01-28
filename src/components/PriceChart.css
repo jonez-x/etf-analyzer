@@ -1,0 +1,121 @@
+.chart-container {
+    width: 100%;
+    position: relative;
+    background: var(--bg-dark-700);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-4);
+}
+
+.chart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-secondary);
+    gap: var(--space-2);
+}
+
+.chart-empty span {
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+.chart-empty p {
+    font-size: 0.875rem;
+}
+
+.chart-legend {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.chart-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 200px;
+}
+
+.chart-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--bg-dark-500);
+    border-top-color: var(--primary-500);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Time Range Selector */
+.time-range-selector {
+    display: flex;
+    gap: var(--space-1);
+    padding: var(--space-1);
+    background: var(--bg-dark-800);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-4);
+}
+
+.time-range-btn {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.time-range-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-dark-600);
+}
+
+.time-range-btn.active {
+    color: white;
+    background: var(--gradient-primary);
+}
+
+/* Comparison Chart Styles */
+.comparison-chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+.comparison-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-dark-600);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.8125rem;
+}
+
+.comparison-legend-line {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+}

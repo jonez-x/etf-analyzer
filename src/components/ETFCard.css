@@ -1,0 +1,230 @@
+.etf-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-5);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.etf-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.etf-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.etf-card:hover::before {
+    opacity: 1;
+}
+
+.etf-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+}
+
+.etf-symbol-link {
+    text-decoration: none;
+}
+
+.etf-symbol {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+    transition: color var(--transition-fast);
+}
+
+.etf-symbol-link:hover .etf-symbol {
+    color: var(--primary-400);
+}
+
+.etf-name {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+    text-decoration: none;
+    line-height: 1.4;
+    min-height: 2.8em;
+}
+
+.etf-name:hover {
+    color: var(--text-primary);
+}
+
+.etf-price-container {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.etf-price-large {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.etf-change-amount {
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.etf-change-amount.positive {
+    color: var(--success-400);
+}
+
+.etf-change-amount.negative {
+    color: var(--danger-400);
+}
+
+.etf-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: var(--space-4);
+}
+
+.etf-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.etf-stat-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.etf-stat-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.etf-card-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.etf-card-actions .btn {
+    flex: 1;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+}
+
+.etf-card-sparkline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.sparkline {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+}
+
+.sparkline.positive {
+    background: linear-gradient(to top, var(--success-500) 0%, transparent 100%);
+}
+
+.sparkline.negative {
+    background: linear-gradient(to top, var(--danger-500) 0%, transparent 100%);
+}
+
+/* Compact Card Style */
+.etf-card-compact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-dark-700);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.etf-card-compact:hover {
+    background: var(--bg-dark-600);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.etf-card-compact-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.etf-card-compact .etf-symbol {
+    font-size: 0.9375rem;
+    font-weight: 700;
+}
+
+.etf-name-compact {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.etf-card-compact-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
+}
+
+.etf-card-compact .etf-price {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.etf-change {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.etf-change.positive {
+    color: var(--success-400);
+}
+
+.etf-change.negative {
+    color: var(--danger-400);
+}
